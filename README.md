@@ -112,6 +112,7 @@ El script de población incluye usuarios de prueba:
   Proveedor             proveedor1@distribuidora.com            123  
   Desarrollador         dev@mascotasymascotitas.com             123  
 
+---
 
 ### 🖥️ Descripción de las Ventanas y sus Objetivos
 
@@ -225,6 +226,10 @@ UnidadMedida Unidades de medida (tableta, cápsula, frasco, etc.).
 Categoria Categorías de medicamentos.
 MedicamentoConcentracion Relación N:M entre medicamentos y concentraciones.
 MedicamentoCategoria Relación N:M entre medicamentos y categorías.
+
+![Diagrama Entidad-Relación en formato "Pata de Gallo"](/Diagrama_Entidad_Relación.png)
+
+
 🛠️ Tecnologías Utilizadas
 
     PHP (backend y lógica de negocio).
