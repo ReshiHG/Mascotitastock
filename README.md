@@ -1,4 +1,4 @@
-# 🐾 Mascotas y Mascotitas - Sistema de Gestión Veterinaria
+# 🐾 Mascotita Stock - Sistema de Gestión Veterinaria
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![PHP](https://img.shields.io/badge/PHP-8.0%2B-777BB4)
@@ -96,11 +96,10 @@ $database = "mascotas_y_mascotitas";
 #### 5. Acceder a la aplicación
 
 Abre tu navegador y visita:
-text
 
 http://mascotitastock.test
 
-    Si el dominio .test no funciona, verifica que Laragon tenga habilitada la opción "Auto virtual hosts" en Preferences → General. También puedes acceder vía http://localhost/Mascotitastock.
+Si el dominio .test no funciona, verifica que Laragon tenga habilitada la opción "Auto virtual hosts" en Preferences → General. También puedes acceder vía http://localhost/Mascotitastock.
 
 #### 6. Credenciales de prueba
 
@@ -117,97 +116,96 @@ Desarrollador dev@mascotasymascotitas.com 123
 
 Objetivo: Autenticar al usuario antes de permitir el acceso al sistema.
 
-    El usuario ingresa su correo electrónico y contraseña.
+- El usuario ingresa su correo electrónico y contraseña.
 
-    Al hacer clic en "Entrar", el sistema valida las credenciales y redirige a la página de inicio.
+- Al hacer clic en "Entrar", el sistema valida las credenciales y redirige a la página de inicio.
 
-    Si las credenciales son incorrectas, se muestra un mensaje de error.
+- Si las credenciales son incorrectas, se muestra un mensaje de error.
 
 #### 2. 🏠 Página de Inicio
 
 Objetivo: Servir como panel de navegación principal hacia todas las secciones del sistema.
 
-    Presenta botones grandes para cada módulo: Usuarios, Inventario, Gestión de Medicamentos, Gestión de Categorías, Proveedores, Pedidos y Salir.
+- Presenta botones grandes para cada módulo: Usuarios, Inventario, Gestión de Medicamentos, Gestión de Categorías, Proveedores, Pedidos y Salir.
 
-    También incluye un menú hamburguesa en la esquina superior derecha con las mismas opciones, útil en dispositivos móviles.
+- También incluye un menú hamburguesa en la esquina superior derecha con las mismas opciones, útil en dispositivos móviles.
 
-    El menú se adapta al rol del usuario (cada rol ve solo las secciones a las que tiene acceso).
+- El menú se adapta al rol del usuario (cada rol ve solo las secciones a las que tiene acceso).
 
 #### 3. 👥 Usuarios
 
 Objetivo: Administrar las cuentas de los usuarios del sistema con sus respectivos roles.
 
-    Formulario "Agregar usuario": Permite dar de alta un nuevo usuario seleccionando su rol (Jefe de Clínica, Veterinario, Gerente, Proveedor, Desarrollador) y capturando sus datos generales (nombre, apellidos, email, teléfono, contraseña).
+- Formulario "Agregar usuario": Permite dar de alta un nuevo usuario seleccionando su rol (Jefe de Clínica, Veterinario, Gerente, Proveedor, Desarrollador) y capturando sus datos generales (nombre, apellidos, email, teléfono, contraseña).
 
-    Sección "Administrar usuarios": Muestra todos los usuarios registrados en tarjetas con sus datos relevantes.
+- Sección "Administrar usuarios": Muestra todos los usuarios registrados en tarjetas con sus datos relevantes.
 
-    Cada tarjeta incluye botones Editar (carga los datos en el formulario superior) y Eliminar (pide confirmación antes de borrar).
+- Cada tarjeta incluye botones Editar (carga los datos en el formulario superior) y Eliminar (pide confirmación antes de borrar).
 
 #### 4. 📦 Inventario
 
 Objetivo: Visualizar y actualizar el stock de medicamentos después de cada consulta veterinaria.
 
-    Muestra tarjetas por medicamento con:
+- Muestra tarjetas por medicamento con:
+  - Apartados: unidades reservadas para clientes.
 
-        Apartados: unidades reservadas para clientes.
+  - Stock disponible: unidades libres.
 
-        Stock disponible: unidades libres.
+  - Tabletas: cantidad actual por envase abierto.
 
-        Tabletas: cantidad actual por envase abierto.
+  - Categorías: a las que pertenece el medicamento.
 
-        Categorías: a las que pertenece el medicamento.
-
-    El botón Editar permite ajustar los valores de apartado, stock disponible y cantidad restante del envase abierto.
+- El botón Editar permite ajustar los valores de apartado, stock disponible y cantidad restante del envase abierto.
 
 #### 5. 💊 Medicamentos
 
 Objetivo: Gestionar el catálogo completo de medicamentos (alta, modificación y eliminación).
 
-    Formulario "Agregar medicamento": Solicita nombre, imagen de referencia, descripción, stock total, stock apartado, cantidad máxima por envase, cantidad actual por envase, unidad de medida y categoría.
+- Formulario "Agregar medicamento": Solicita nombre, imagen de referencia, descripción, stock total, stock apartado, cantidad máxima por envase, cantidad actual por envase, unidad de medida y categoría.
 
-    Sección "Administrar medicamentos": Incluye un buscador por nombre y muestra cada medicamento en una tarjeta con toda su información.
+- Sección "Administrar medicamentos": Incluye un buscador por nombre y muestra cada medicamento en una tarjeta con toda su información.
 
-    Botones Editar y Eliminar por medicamento, con confirmación antes de borrar.
+- Botones Editar y Eliminar por medicamento, con confirmación antes de borrar.
 
 #### 6. 🏷️ Categorías
 
 Objetivo: Mantener el catálogo de categorías para clasificar los medicamentos.
 
-    Formulario "Agregar categoría": Nombre de la nueva categoría.
+- Formulario "Agregar categoría": Nombre de la nueva categoría.
 
-    Sección "Administrar categorías": Lista todas las categorías con botones Editar y Eliminar.
+- Sección "Administrar categorías": Lista todas las categorías con botones Editar y Eliminar.
 
-    Al editar, el nombre se carga en el formulario superior para su modificación.
+- Al editar, el nombre se carga en el formulario superior para su modificación.
 
 #### 7. 🏢 Proveedores
 
 Objetivo: Administrar los proveedores de medicamentos con los que trabaja la clínica.
 
-    Formulario "Agregar proveedor": Datos generales (nombre, apellidos, email, teléfono).
+- Formulario "Agregar proveedor": Datos generales (nombre, apellidos, email, teléfono).
 
-    Sección "Administrar proveedores": Tarjetas por proveedor con botones Editar y Eliminar.
+- Sección "Administrar proveedores": Tarjetas por proveedor con botones Editar y Eliminar.
 
-    Los proveedores se asocian posteriormente a los pedidos.
+- Los proveedores se asocian posteriormente a los pedidos.
 
 #### 8. 📋 Pedidos
 
 Objetivo: Llevar el control del ciclo de vida completo de los pedidos a proveedores.
 
-    Formulario "Agregar pedido": Solicita descripción (medicamentos y cantidades), proveedor y fecha de entrega estimada (por defecto, el día siguiente).
+- Formulario "Agregar pedido": Solicita descripción (medicamentos y cantidades), proveedor y fecha de entrega estimada (por defecto, el día siguiente).
 
-    Al crear un pedido, su estado inicial es Solicitado.
+- Al crear un pedido, su estado inicial es Solicitado.
 
-    Sección "Administrar pedidos": Muestra cada pedido con:
+- Sección "Administrar pedidos": Muestra cada pedido con:
 
-        Identificador, estado, proveedor, descripción.
+-     Identificador, estado, proveedor, descripción.
 
-        Fecha de solicitud, fecha de entrega estimada y fecha de entrega real.
+-     Fecha de solicitud, fecha de entrega estimada y fecha de entrega real.
 
-    Al recibir un pedido, se debe Editar, cambiar el estado a Recibido y registrar la fecha de entrega real.
+- Al recibir un pedido, se debe Editar, cambiar el estado a Recibido y registrar la fecha de entrega real.
 
-    Los estados disponibles son: Pendiente de aprobación, Aprobado, Solicitado, En tránsito, Recibido, Cancelado.
+- Los estados disponibles son: Pendiente de aprobación, Aprobado, Solicitado, En tránsito, Recibido, Cancelado.
 
-    Botón Eliminar con confirmación.
+- Botón Eliminar con confirmación.
 
 ### 🗄️ Estructura de la Base de Datos
 
@@ -250,4 +248,4 @@ MedicamentoCategoria Relación N:M entre medicamentos y categorías.
 
 📄 Licencia
 
-Proyecto desarrollado con fines educativos y de gestión interna para la clínica veterinaria Mascotas y Mascotitas. Todos los derechos reservados.
+Proyecto desarrollado para la gestión interna para la clínica veterinaria Mascotas y Mascotitas. Todos los derechos reservados.
