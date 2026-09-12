@@ -211,21 +211,24 @@ Objetivo: Llevar el control del ciclo de vida completo de los pedidos a proveedo
 
 - Botón Eliminar con confirmación.
 
+---
+
 ### 🗄️ Estructura de la Base de Datos
 
-El sistema se compone de las siguientes tablas:
-Tabla Descripción
-RolUsuario Catálogo de roles del sistema.
-Usuario Cuentas de acceso con rol asignado.
-Proveedor Proveedores de medicamentos.
-Pedido Pedidos realizados a proveedores.
-EstadoPedido Catálogo de estados del pedido.
-Medicamento Catálogo de medicamentos con control de stock.
-Concentracion Concentraciones disponibles (mg, ml, g).
-UnidadMedida Unidades de medida (tableta, cápsula, frasco, etc.).
-Categoria Categorías de medicamentos.
-MedicamentoConcentracion Relación N:M entre medicamentos y concentraciones.
-MedicamentoCategoria Relación N:M entre medicamentos y categorías.
+**El sistema se compone de las siguientes tablas:**  
+
+* Tabla Descripción  
+* RolUsuario Catálogo de roles del sistema.  
+* Usuario Cuentas de acceso con rol asignado.  
+* Proveedor Proveedores de medicamentos.  
+* Pedido Pedidos realizados a proveedores.  
+* EstadoPedido Catálogo de estados del pedido.  
+* Medicamento Catálogo de medicamentos con control de stock.  
+* Concentracion Concentraciones disponibles (mg, ml, g).  
+* UnidadMedida Unidades de medida (tableta, cápsula, frasco, etc.).  
+* Categoria Categorías de medicamentos.  
+* MedicamentoConcentracion Relación N:M entre medicamentos y concentraciones.  
+* MedicamentoCategoria Relación N:M entre medicamentos y categorías.  
 
 ![Diagrama Entidad-Relación en formato "Pata de Gallo"](/Diagrama_Entidad_Relación.png)
 
@@ -246,13 +249,13 @@ MedicamentoCategoria Relación N:M entre medicamentos y categorías.
 
 📝 Notas Adicionales
 
-    Las contraseñas de los usuarios de prueba son 123 y están almacenadas en texto plano con fines demostrativos. En producción deben almacenarse con password_hash() de PHP (bcrypt).
+Las contraseñas de los usuarios de prueba son 123 y están almacenadas en texto plano con fines demostrativos. En producción deben almacenarse con password_hash() de PHP (bcrypt).
 
-    El archivo EJEMPLO.SQL contiene una consulta de referencia con un error tipográfico: usa P.EstadoPedido en lugar de P.IDEstadoPedido. Corrígelo si lo reutilizas.
+El archivo EJEMPLO.SQL contiene una consulta de referencia con un error tipográfico: usa P.EstadoPedido en lugar de P.IDEstadoPedido. Corrígelo si lo reutilizas.
 
-    El script de base de datos debe ejecutarse en bloques si se usa DBeaver, para evitar conflictos con su analizador SQL.
+El script de base de datos debe ejecutarse en bloques si se usa DBeaver, para evitar conflictos con su analizador SQL.
 
-    El repositorio oficial del proyecto es: https://github.com/ReshiHG/Mascotitastock
+El repositorio oficial del proyecto es: https://github.com/ReshiHG/Mascotitastock
 
 📄 Licencia
 
