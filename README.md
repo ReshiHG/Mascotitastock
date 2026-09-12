@@ -103,14 +103,17 @@ Si el dominio .test no funciona, verifica que Laragon tenga habilitada la opció
 
 #### 6. Credenciales de prueba
 
-El script de población incluye usuarios de prueba con la contraseña 123:
-Rol Correo Contraseña
-Jefe de Clínica jefa.clinica@mascotasymascotitas.com 123
-Veterinario veterinario1@mascotasymascotitas.com 123
-Gerente de Inventario gerente.inv@mascotasymascotitas.com 123
-Proveedor proveedor1@distribuidora.com 123
-Desarrollador dev@mascotasymascotitas.com 123
-🖥️ Descripción de las Ventanas y sus Objetivos
+El script de población incluye usuarios de prueba:
+
+  Rol               |   Correo                                | Contraseña  
+  Jefe de Clínica       jefa.clinica@mascotasymascotitas.com    123  
+  Veterinario           veterinario1@mascotasymascotitas.com    123  
+  Gerente de Inventario gerente.inv@mascotasymascotitas.com     123  
+  Proveedor             proveedor1@distribuidora.com            123  
+  Desarrollador         dev@mascotasymascotitas.com             123  
+
+
+### 🖥️ Descripción de las Ventanas y sus Objetivos
 
 #### 1. 🔐 Inicio de Sesión
 
