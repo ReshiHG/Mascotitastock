@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Dependencias de Composer
+/vendor/
+
+# Variables de entorno
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

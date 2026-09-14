@@ -42,7 +42,15 @@ git clone https://github.com/ReshiHG/Mascotitastock.git
 
 Esto creará la carpeta Mascotitastock dentro de www.
 
-#### 2. Iniciar los servicios de Laragon
+#### 2. Instalar dependencias
+
+En el repositorio instala las dependencias (phpdotenv)
+
+```bash
+composer install
+```
+
+#### 3. Iniciar los servicios de Laragon
 
 Abre Laragon.
 
@@ -50,7 +58,7 @@ Haz clic en Start All (o Iniciar todo) para levantar Apache/Nginx y MySQL.
 
 Verifica que ambos servicios estén en verde.
 
-#### 3. Crear la base de datos
+#### 4. Crear la base de datos
 
 ##### Opción A: Desde DBeaver (recomendado)
 
@@ -81,19 +89,19 @@ bash
 
 mysql -u root < C:\laragon\www\Mascotitastock\Crear_base_de_datos_y_poblarla.sql
 
-#### 4. Configurar la conexión a la base de datos
+#### 5. Configurar la conexión a la base de datos
 
-Localiza el archivo de configuración de conexión (normalmente en modelos/conexion.php o similar) y verifica los siguientes datos:
-php
+Crea tu archivo **.env** guiandote con el **.env.example**
 
-$host = "localhost";
-$user = "root";
-$password = "";        // Laragon por defecto no usa contraseña
-$database = "mascotas_y_mascotitas";
 
-    Si tu instalación de Laragon tiene contraseña para root, ajústala aquí.
+    DB_HOST=localhost  
+    DB_NAME=mascotitastock  
+    DB_USER=root  
+    DB_PASSWORD=  
 
-#### 5. Acceder a la aplicación
+Si tu instalación de Laragon tiene contraseña para root, ajústala aquí.
+
+#### 6. Acceder a la aplicación
 
 Abre tu navegador y visita:
 
@@ -101,16 +109,17 @@ http://mascotitastock.test
 
 Si el dominio .test no funciona, verifica que Laragon tenga habilitada la opción "Auto virtual hosts" en Preferences → General. También puedes acceder vía http://localhost/Mascotitastock.
 
-#### 6. Credenciales de prueba
+#### 7. Credenciales de prueba
 
 El script de población incluye usuarios de prueba:
 
-  Rol               |   Correo                                | Contraseña  
-  Jefe de Clínica       jefa.clinica@mascotasymascotitas.com    123  
-  Veterinario           veterinario1@mascotasymascotitas.com    123  
-  Gerente de Inventario gerente.inv@mascotasymascotitas.com     123  
-  Proveedor             proveedor1@distribuidora.com            123  
-  Desarrollador         dev@mascotasymascotitas.com             123  
+  | Rol | Correo | Contraseña |
+  |-|-|-|
+  |Jefe de Clínica|jefa.clinica@mascotasymascotitas.com|123|  
+  |Veterinario|veterinario1@mascotasymascotitas.com|123|  
+  |Gerente de Inventario|gerente.inv@mascotasymascotitas.com|123  
+  |Proveedor|proveedor1@distribuidora.com|123|
+  |Desarrollador|dev@mascotasymascotitas.com|123|
 
 ---
 
@@ -125,6 +134,8 @@ Objetivo: Autenticar al usuario antes de permitir el acceso al sistema.
 - Al hacer clic en "Entrar", el sistema valida las credenciales y redirige a la página de inicio.
 
 - Si las credenciales son incorrectas, se muestra un mensaje de error.
+
+Aquí utilicé el hash para proteger las contraseñas, además de consultas estructuradas para evitar la inyección SQL.
 
 #### 2. 🏠 Página de Inicio
 
