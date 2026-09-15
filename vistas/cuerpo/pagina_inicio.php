@@ -47,7 +47,7 @@
             <a href="pagina_calendario.php" class="btn boton-primario btn-lg btn-block">Calendario</a>
           </p> -->
           <p class="card-text">
-            <a href="../../index.php" class="btn boton-peligro btn-lg btn-block">Salir</a>
+            <a href="../../controladores/cerrar_sesion.php" class="btn boton-peligro btn-lg btn-block">Salir</a>
           </p>
         </div>
       </div>

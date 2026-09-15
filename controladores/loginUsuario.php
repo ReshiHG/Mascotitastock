@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../config.php';
 
 try {
@@ -16,9 +17,11 @@ try {
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $conexion->prepare(
-      "SELECT IDUsuario, Contrasenia FROM usuario 
-       WHERE Email = :email 
-         AND BitActivo = 1"
+      "SELECT u.IDUsuario, u.Nombre, u.Contrasenia, r.IDRol, r.NomRol FROM usuario u 
+         inner join rolusuario r 
+         where u.IDRol = r.IDRol  
+         AND u.Email = :email 
+         AND u.BitActivo = 1"
     );
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -26,7 +29,13 @@ try {
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario && password_verify($contrasenia, $usuario['Contrasenia'])) {
+      session_regenerate_id(true);
+      $_SESSION['IDUsuario'] = $usuario['IDUsuario'];
+      $_SESSION['Nombre']    = $usuario['Nombre'];
+      $_SESSION['IDRol']     = $usuario['IDRol'];
+      $_SESSION['NomRol']     = $usuario['NomRol'];
       echo '<script>window.location.href="vistas/cuerpo/pagina_inicio.php";</script>';
+      exit;
     } else {
       echo '<div class="alert alert-warning" role="alert">¡Correo o contraseña errónea, favor de validar!</div>';
     }
