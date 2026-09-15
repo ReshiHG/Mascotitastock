@@ -260,9 +260,7 @@ Objetivo: Llevar el control del ciclo de vida completo de los pedidos a proveedo
 
 📝 Notas Adicionales
 
-Las contraseñas de los usuarios de prueba son 123 y están almacenadas en texto plano con fines demostrativos. En producción deben almacenarse con password_hash() de PHP (bcrypt).
-
-El archivo EJEMPLO.SQL contiene una consulta de referencia con un error tipográfico: usa P.EstadoPedido en lugar de P.IDEstadoPedido. Corrígelo si lo reutilizas.
+Las contraseñas de los usuarios de prueba son 123, aunqué están hasheadas para respetar las buenas prácticas.
 
 El script de base de datos debe ejecutarse en bloques si se usa DBeaver, para evitar conflictos con su analizador SQL.
 
