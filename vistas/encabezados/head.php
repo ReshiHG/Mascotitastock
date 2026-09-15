@@ -1,6 +1,9 @@
 <?php
+// Carga la configuración inical y constantes globales
+require_once __DIR__ . '/../../config.php';
 // Verifica que haya una sesión iniciada, de lo contrario redirige al login
 require_once __DIR__ . '/../../controladores/verificar_sesion.php';
+
 
 // Rerorna el encabezado html con el título de la página
 function generarHead($titulo)
