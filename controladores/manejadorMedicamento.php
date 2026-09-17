@@ -1,7 +1,9 @@
 <?php
-try {
 
-  $conexion = require_once __DIR__ . '/../conexion.php';
+require_once __DIR__ . '/../conexion.php';
+
+try {
+  $conexion = getConexion();
 
   //===============================Inicializamos las variables==========================================
   $modo = "insertar";

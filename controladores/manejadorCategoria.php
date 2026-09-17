@@ -1,7 +1,8 @@
 <?php
-try {
+require_once __DIR__ . '/../conexion.php';
 
-  $conexion = require_once __DIR__ . '/../conexion.php';
+try {
+  $conexion = getConexion();
 
   $modo = 'insertar';
   $resultadoConsulta = null;

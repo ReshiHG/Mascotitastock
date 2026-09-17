@@ -1,6 +1,7 @@
 <?php
 session_start();
-$conexion = require_once __DIR__ . '/../conexion.php';
+require_once __DIR__ . '/../conexion.php';
+$conexion = getConexion();
 
 try {
   if ($_POST) {

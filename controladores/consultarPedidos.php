@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../conexion.php';
 try {
-  $conexion = require_once __DIR__ . '/../conexion.php';
+  $conexion = getConexion();
 
   date_default_timezone_set('America/Mexico_City');
   setlocale(LC_TIME, 'es_ES.UTF-8'); // Cambiar configuración regional a español

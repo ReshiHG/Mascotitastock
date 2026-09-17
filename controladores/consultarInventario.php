@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../conexion.php';
 try {
-  $conexion = require_once __DIR__ . '/../conexion.php';
+  $conexion = getConexion();
   // echo "Conexión realizada" . '<br><br>';
   $resultado = $conexion->query('
                             SELECT
@@ -40,7 +41,7 @@ try {
     $idMedicamentoCategoria = $res['IDMedicamentoCategoria'];
     $idCategoria = $res['IDCategoria'];
     $nomCategoria = $res['nomCategoria'];
-    
+
     if ((int)$idGET === (int)$idMedicamento) {
       echo "
       <div class='col'>
@@ -131,7 +132,6 @@ try {
                 ";
     }
   }
-
 } catch (PDOException $e) { //Mostrar error
   echo "Error: " . $e->getMessage();
 }

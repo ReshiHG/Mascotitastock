@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../conexion.php';
 try {
-  $conexion = require_once __DIR__ . '/../conexion.php';
+  $conexion = getConexion();
 
   $resultado = $conexion->query('
                             SELECT

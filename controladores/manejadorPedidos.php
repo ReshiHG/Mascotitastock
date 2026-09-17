@@ -1,8 +1,9 @@
 <?php
-try {
+require_once __DIR__ . '/../conexion.php';
 
+try {
   // Conecta con la base de datos
-  $conexion = require_once __DIR__ . '/../conexion.php';
+  $conexion = getConexion();
 
   date_default_timezone_set('America/Mexico_City');
 
