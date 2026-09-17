@@ -1,7 +1,7 @@
 <?php
 try {
 
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
   //===============================Inicializamos las variables==========================================
   $modo = "insertar";
@@ -22,7 +22,7 @@ try {
   ];
 
   //Obtenemos las unidades de medida para el formulario
-  $stmt = $bdd->query("SELECT IDUnidadMedida, Nombre FROM unidad_medida WHERE BitActivo = 1 ORDER BY Nombre");
+  $stmt = $conexion->query("SELECT IDUnidadMedida, Nombre FROM unidad_medida WHERE BitActivo = 1 ORDER BY Nombre");
 
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $arrayUnidadMedida[] = [
@@ -32,7 +32,7 @@ try {
   }
 
   //Obtenemos las categorias para el formulario
-  $stmt = $bdd->query("SELECT IDCategoria, Nombre FROM categoria WHERE BitActivo = 1 ORDER BY Nombre");
+  $stmt = $conexion->query("SELECT IDCategoria, Nombre FROM categoria WHERE BitActivo = 1 ORDER BY Nombre");
 
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $arrayCategoria[] = [
@@ -51,7 +51,7 @@ try {
     switch ($modo) {
       // ============ Asigna variables para llenar formulario UPDATE ================
       case "actualizar":
-        $resultado = $bdd->query("
+        $resultado = $conexion->query("
                             SELECT
                               M.Nombre as nomMedicamento,
                               M.Descripcion,
@@ -95,12 +95,12 @@ try {
       case "eliminar":
         $sql = "DELETE FROM medicamento_categoria WHERE IDMedicamento = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultadoMedCat = $stmt->execute([$IDMedicamento]);
         
         $sql = "DELETE FROM medicamento WHERE IDMedicamento = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultadoMed = $stmt->execute([$IDMedicamento]);
 
         // Valida el éxito del INSERT
@@ -156,7 +156,7 @@ try {
               (?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
     ";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $idUnidadMedida,
       $nombreMedicamento,
@@ -169,22 +169,22 @@ try {
       $imagenNombre
     ]);
 
-    $ultimoIDMedicamento = $bdd->lastInsertId();
+    $ultimoIDMedicamento = $conexion->lastInsertId();
 
     // echo "$ultimoIDMedicamento";
 
     $sql = "INSERT INTO medicamento_categoria (IDMedicamento, IDCategoria, bitActivo)
                               VALUES (?, ?, 1)";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([$ultimoIDMedicamento, $idCategoria]);
-    $ultimoIDMedicamentoCategoria = $bdd->lastInsertId();
+    $ultimoIDMedicamentoCategoria = $conexion->lastInsertId();
 
     // ECHO "med_cat";
 
 
-    $validaInsertMedicamento = $bdd->query("SELECT * FROM medicamento where IDMedicamento = $ultimoIDMedicamento AND bitActivo = 1");
-    $validaInsertMedicamentoCategoria = $bdd->query("SELECT * FROM medicamento_categoria where IDMedicamentoCategoria = $ultimoIDMedicamentoCategoria AND bitActivo = 1");
+    $validaInsertMedicamento = $conexion->query("SELECT * FROM medicamento where IDMedicamento = $ultimoIDMedicamento AND bitActivo = 1");
+    $validaInsertMedicamentoCategoria = $conexion->query("SELECT * FROM medicamento_categoria where IDMedicamentoCategoria = $ultimoIDMedicamentoCategoria AND bitActivo = 1");
 
     // //---------------------------- Valida el éxito del INSERT ----------------------------
     if ($validaInsertMedicamento and $validaInsertMedicamentoCategoria and move_uploaded_file($imagen, $ruta . $imagenNombre)) {
@@ -257,7 +257,7 @@ try {
             imagen = ?
         WHERE IDMedicamento = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $idUnidadMedida,
       $nombreMedicamento,
@@ -271,22 +271,22 @@ try {
       $IDMedicamento
     ]);
 
-    $ultimoID = $bdd->lastInsertId();
-    $validaUpdateMedicamento = $bdd->query("SELECT * FROM medicamento WHERE IDMedicamento = $IDMedicamento");
+    $ultimoID = $conexion->lastInsertId();
+    $validaUpdateMedicamento = $conexion->query("SELECT * FROM medicamento WHERE IDMedicamento = $IDMedicamento");
     $existeMedicamento = $validaUpdateMedicamento && $validaUpdateMedicamento->rowCount() > 0;
 
     $sql = "UPDATE medicamento_categoria 
         SET IDCategoria = ?
         WHERE IDMedicamentoCategoria = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $idCategoria,
       $idMedicamentoCategoria
     ]);
 
-    $ultimoID = $bdd->lastInsertId();
-    $validaUpdateMedicamentoCategoria = $bdd->query("SELECT * FROM medicamento_categoria WHERE IDMedicamentoCategoria = $idMedicamentoCategoria");
+    $ultimoID = $conexion->lastInsertId();
+    $validaUpdateMedicamentoCategoria = $conexion->query("SELECT * FROM medicamento_categoria WHERE IDMedicamentoCategoria = $idMedicamentoCategoria");
     $existeCategoria = $validaUpdateMedicamentoCategoria && $validaUpdateMedicamentoCategoria->rowCount() > 0;
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------

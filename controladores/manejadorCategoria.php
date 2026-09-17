@@ -1,7 +1,7 @@
 <?php
 try {
 
-  require("conexion.php");
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
   $modo = 'insertar';
   $resultadoConsulta = null;
@@ -16,7 +16,7 @@ try {
     switch ($modo) {
       // ============ Asigna variables para llenar formulario UPDATE ================
       case "actualizar":
-        $resultado = $bdd->query("
+        $resultado = $conexion->query("
                             SELECT
                               Nombre
                             FROM
@@ -33,7 +33,7 @@ try {
       case "eliminar":
         $sql = "DELETE FROM categoria WHERE IDCategoria = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultadoDelete = $stmt->execute([$IDCategoria]);
         
         // Valida el éxito del INSERT
@@ -68,13 +68,13 @@ try {
               (?, 1)
     ";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $nombreCategoria
     ]);
 
-    $ultimoIDCategoria = $bdd->lastInsertId();
-    $validaInsertCategoria = $bdd->query("SELECT * FROM categoria where IDCategoria = $ultimoIDCategoria AND bitActivo = 1");
+    $ultimoIDCategoria = $conexion->lastInsertId();
+    $validaInsertCategoria = $conexion->query("SELECT * FROM categoria where IDCategoria = $ultimoIDCategoria AND bitActivo = 1");
 
     // //---------------------------- Valida el éxito del INSERT ----------------------------
     if ($validaInsertCategoria) {
@@ -103,13 +103,13 @@ try {
         SET Nombre = ?
         WHERE IDCategoria = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $nombreCategoria,
       $IDCategoria
     ]);
 
-    $validaUpdateCategoria = $bdd->query("SELECT * FROM categoria WHERE IDCategoria = $IDCategoria");
+    $validaUpdateCategoria = $conexion->query("SELECT * FROM categoria WHERE IDCategoria = $IDCategoria");
     $existecategoria = $validaUpdateCategoria && $validaUpdateCategoria->rowCount() > 0;
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------

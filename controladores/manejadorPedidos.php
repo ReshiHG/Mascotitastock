@@ -2,7 +2,7 @@
 try {
 
   // Conecta con la base de datos
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
   date_default_timezone_set('America/Mexico_City');
 
@@ -24,7 +24,7 @@ try {
   ];
 
   //Obtenemos los proveedores
-  $stmt = $bdd->query("SELECT IDProveedor, Nombre, ApellidoPaterno, ApellidoMaterno FROM proveedor WHERE BitActivo = 1 ORDER BY Nombre");
+  $stmt = $conexion->query("SELECT IDProveedor, Nombre, ApellidoPaterno, ApellidoMaterno FROM proveedor WHERE BitActivo = 1 ORDER BY Nombre");
 
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $arrayProveedor[] = [
@@ -34,7 +34,7 @@ try {
   }
 
   //Obtenemos los estados de pedido para el formulario
-  $stmt = $bdd->query("SELECT IDEstadoPedido, Descripcion FROM estado_pedido WHERE BitActivo = 1 ORDER BY IDEstadoPedido");
+  $stmt = $conexion->query("SELECT IDEstadoPedido, Descripcion FROM estado_pedido WHERE BitActivo = 1 ORDER BY IDEstadoPedido");
 
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $arrayEstadoPedido[] = [
@@ -52,7 +52,7 @@ try {
     switch ($modo) {
       // ============ Asigna variables para llenar formulario UPDATE ================
       case "actualizar":
-        $resultado = $bdd->query("
+        $resultado = $conexion->query("
           SELECT
             P.IDPedido,
             P.IDProveedor,
@@ -89,7 +89,7 @@ try {
       case "eliminar":
         $sql = "DELETE FROM pedido WHERE IDPedido = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultado = $stmt->execute([$ID]);
 
         // Valida el éxito del INSERT
@@ -120,10 +120,10 @@ try {
     $sql = "INSERT INTO pedido (IDProveedor, Descripcion, FechaSolicitud, FechaEntregaEstimada, EstadoPedido, BitActivo)
                               VALUES (?, ?, ?, ?, 3, 1)";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([$IDProveedor, $descripcionPedido, $fechaSolicitud, $fechaEntregaEstimada]);
-    $ultimoID = $bdd->lastInsertId();
-    $resultado = $bdd->query("SELECT * FROM pedido where IDPedido = $ultimoID");
+    $ultimoID = $conexion->lastInsertId();
+    $resultado = $conexion->query("SELECT * FROM pedido where IDPedido = $ultimoID");
 
     //---------------------------- Valida el éxito del INSERT ----------------------------
     if ($resultado) {
@@ -168,7 +168,7 @@ try {
             EstadoPedido = ?
         WHERE IDPedido = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $IDProveedor,
       $descripcionPedido,
@@ -181,7 +181,7 @@ try {
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------
     if ($resultado) {
-      $consulta = $bdd->prepare("SELECT * FROM pedido WHERE IDPedido = ?");
+      $consulta = $conexion->prepare("SELECT * FROM pedido WHERE IDPedido = ?");
       $consulta->execute([$IDProveedor]);
       $resultadoConsulta = "update exitoso";
     } else {

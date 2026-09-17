@@ -1,8 +1,8 @@
 <?php
 try {
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
   // echo "Conexión realizada" . '<br><br>';
-  $resultado = $bdd->query('
+  $resultado = $conexion->query('
                             SELECT
                               M.IDMedicamento,
                               M.Nombre as nomMedicamento,

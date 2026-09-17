@@ -1,8 +1,8 @@
 <?php
 try { //Código
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
   // echo "Conexión realizada" . '<br><br>';
-  $resultado = $bdd->query('SELECT U.IDUsuario,ROL.nomRol,U.Nombre,U.ApellidoPaterno,U.ApellidoMaterno,U.Email,U.Contraseña,U.Telefono,U.BitActivo FROM usuario AS U INNER JOIN rol_de_usuario AS ROL ON ROL.IDRol = U.IDRol WHERE U.BitActivo=1');
+  $resultado = $conexion->query('SELECT U.IDUsuario,ROL.nomRol,U.Nombre,U.ApellidoPaterno,U.ApellidoMaterno,U.Email,U.Contraseña,U.Telefono,U.BitActivo FROM usuario AS U INNER JOIN rol_de_usuario AS ROL ON ROL.IDRol = U.IDRol WHERE U.BitActivo=1');
   foreach ($resultado as $res) {
     $IDUsuario = $res['IDUsuario'];
     $nomRol = $res['nomRol'];

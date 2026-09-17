@@ -2,7 +2,7 @@
 try {
 
   // Conecta con la base de datos
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
   // Inicializa variables
   $modo = "";
@@ -27,7 +27,7 @@ try {
     switch ($modo) {
       // ============ Asigna variables para llenar formulario UPDATE ================
       case "actualizar":
-        $resultado = $bdd->query("SELECT IDProveedor, Nombre, ApellidoPaterno, ApellidoMaterno, Email, Telefono FROM proveedor where IDProveedor = $ID AND bitActivo=1");
+        $resultado = $conexion->query("SELECT IDProveedor, Nombre, ApellidoPaterno, ApellidoMaterno, Email, Telefono FROM proveedor where IDProveedor = $ID AND bitActivo=1");
         foreach ($resultado as $res) {
           $IDProveedor = $res['IDProveedor'];
           $Nombre = $res['Nombre'];
@@ -41,7 +41,7 @@ try {
       case "eliminar":
         $sql = "DELETE FROM proveedor WHERE IDProveedor = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultado = $stmt->execute([$ID]);
 
         // Valida el éxito del INSERT
@@ -74,12 +74,12 @@ try {
     $sql = "INSERT INTO proveedor (Nombre, ApellidoPaterno, ApellidoMaterno, Email, FechaCreacion, Telefono, BitActivo)
                               VALUES (?, ?, ?, ?, ?, ?, 1)";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([$nombre, $apellidoPaterno, $apellidoMaterno, $email, $fechaInsert, $telefono]);
-    $ultimoID = $bdd->lastInsertId();
+    $ultimoID = $conexion->lastInsertId();
 
     //---------------------------- Valida el éxito del INSERT ----------------------------
-    $resultado = $bdd->query("SELECT * FROM proveedor where IDProveedor = $ultimoID");
+    $resultado = $conexion->query("SELECT * FROM proveedor where IDProveedor = $ultimoID");
     if ($resultado) {
       $resultadoConsulta = "insert exitoso";
     } else {
@@ -119,7 +119,7 @@ try {
             FechaModifica = ?
         WHERE IDProveedor = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $nombre,
       $apellidoPaterno,
@@ -132,7 +132,7 @@ try {
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------
     if ($resultado) {
-      $consulta = $bdd->prepare("SELECT * FROM proveedor WHERE IDProveedor = ?");
+      $consulta = $conexion->prepare("SELECT * FROM proveedor WHERE IDProveedor = ?");
       $consulta->execute([$IDProveedor]);
       $resultadoConsulta = "update exitoso";
     } else {

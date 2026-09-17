@@ -1,8 +1,9 @@
 <?php
-try { //Código
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+try {
+  $conexion = require_once __DIR__ . '/../conexion.php';
+  
   // echo "Conexión realizada" . '<br><br>';
-  $resultado = $bdd->query('
+  $resultado = $conexion->query('
                             SELECT
                               IDProveedor,
                               Nombre,

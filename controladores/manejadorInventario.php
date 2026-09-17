@@ -1,5 +1,8 @@
 <?php 
 try {
+  // Conecta con la base de datos
+  $conexion = require_once __DIR__ . '/../conexion.php';
+
   $idMedicamento = 0;
   $nomMedicamento = "";
   $stockApartado = 0;
@@ -18,9 +21,6 @@ try {
   $modoGET = "";
 
   
-  // Conecta con la base de datos
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
-
   if (isset($_GET['idMed']) and isset($_GET['modo'])) {
     $idGET = $_GET['idMed'];
     $modoGET = $_GET['modo'];
@@ -43,7 +43,7 @@ try {
             CantidadActualPorEnvase = ?
         WHERE IDMedicamento  = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $nomMedicamento,
       $stockApartado,
@@ -53,8 +53,8 @@ try {
       $idMedicamento
     ]);
 
-    $ultimoID = $bdd->lastInsertId();
-    $resultado = $bdd->query("SELECT * FROM medicamento where IDMedicamento = $ultimoID");
+    $ultimoID = $conexion->lastInsertId();
+    $resultado = $conexion->query("SELECT * FROM medicamento where IDMedicamento = $ultimoID");
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------
     if ($resultado) {

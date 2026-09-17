@@ -1,6 +1,6 @@
 <?php
 try {
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
   date_default_timezone_set('America/Mexico_City');
   setlocale(LC_TIME, 'es_ES.UTF-8'); // Cambiar configuración regional a español
@@ -34,7 +34,7 @@ try {
   }
 
 
-  $resultado = $bdd->query('
+  $resultado = $conexion->query('
     SELECT
       P.IDPedido,
       P.IDProveedor,

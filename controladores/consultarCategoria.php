@@ -1,8 +1,8 @@
 <?php
 try {
-  require("conexion.php");
+  $conexion = require_once __DIR__ . '/../conexion.php';
 
-  $resultado = $bdd->query('
+  $resultado = $conexion->query('
                             SELECT
                               IDCategoria,
                               Nombre
@@ -39,7 +39,6 @@ try {
                 </div>
               </div>    
     ";
-
   }
 } catch (PDOException $e) { //Mostrar error
   echo "Error: " . $e->getMessage();

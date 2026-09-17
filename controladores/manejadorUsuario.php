@@ -2,11 +2,10 @@
 try {
 
   // Conecta con la base de datos
-  $bdd = new PDO('mysql:host=localhost;dbname=macotitastock', 'root', '');
-
+  $conexion = require_once __DIR__ . '/../conexion.php';
+  
   // Inicializa variables
   $modo = "";
-
   $IDUsuario = 0;
   $IDRol = 0;
   $Nombre = "";
@@ -16,7 +15,6 @@ try {
   $Contrasenia = "";
   $Telefono = 0;
   $BitActivo = 0;
-
   $resultadoConsulta = "";
 
   //=====================================================================================================================================================
@@ -26,9 +24,9 @@ try {
     $ID = $_GET['id'];
     $modo = $_GET['modo'];
     switch ($modo) {
-        // ============ Asigna variables para llenar formulario UPDATE ================
+      // ============ Asigna variables para llenar formulario UPDATE ================
       case "actualizar":
-        $resultado = $bdd->query("SELECT * FROM usuario where IDUsuario = $ID");
+        $resultado = $conexion->query("SELECT * FROM usuario where IDUsuario = $ID");
         foreach ($resultado as $res) {
           $IDUsuario = $res['IDUsuario'];
           $IDRol = $res['IDRol'];
@@ -41,11 +39,11 @@ try {
           $BitActivo = $res['BitActivo'];
         }
         break;
-        // ======================= Elimina en la base de datos =========================
+      // ======================= Elimina en la base de datos =========================
       case "eliminar":
         $sql = "DELETE FROM usuario WHERE IDUsuario = ?";
 
-        $stmt = $bdd->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $resultado = $stmt->execute([$ID]);
 
         // Valida el éxito del INSERT
@@ -79,13 +77,13 @@ try {
     $sql = "INSERT INTO usuario (IDRol, Nombre, ApellidoPaterno, ApellidoMaterno, Email, Contraseña, Telefono, BitActivo)
                               VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([$IDRol, $nombre, $apellidoPaterno, $apellidoMaterno, $email, $contrasenia, $telefono]);
-    $ultimoID = $bdd->lastInsertId();
+    $ultimoID = $conexion->lastInsertId();
 
     //---------------------------- Valida el éxito del INSERT ----------------------------
     if ($resultado) {
-      $resultado = $bdd->query("SELECT IDUsuario,IDRol,Nombre,ApellidoPaterno,ApellidoMaterno,Email,Contraseña,Telefono FROM usuario where IDUsuario = $ultimoID");
+      $resultado = $conexion->query("SELECT IDUsuario,IDRol,Nombre,ApellidoPaterno,ApellidoMaterno,Email,Contraseña,Telefono FROM usuario where IDUsuario = $ultimoID");
       $resultadoConsulta = "insert exitoso";
     } else {
       $error = print_r($stmt->errorInfo());
@@ -127,7 +125,7 @@ try {
             Telefono = ?
         WHERE IDUsuario = ?";
 
-    $stmt = $bdd->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $resultado = $stmt->execute([
       $IDRol,
       $nombre,
@@ -139,11 +137,11 @@ try {
       $IDUsuario // Este debe venir del formulario o de la URL
     ]);
 
-    $ultimoID = $bdd->lastInsertId();
+    $ultimoID = $conexion->lastInsertId();
 
     //---------------------------- Valida el éxito del UPDATE ----------------------------
     if ($resultado) {
-      $resultado = $bdd->query("SELECT IDUsuario,IDRol,Nombre,ApellidoPaterno,ApellidoMaterno,Email,Contraseña,Telefono FROM usuario where IDUsuario = $ultimoID");
+      $resultado = $conexion->query("SELECT IDUsuario,IDRol,Nombre,ApellidoPaterno,ApellidoMaterno,Email,Contraseña,Telefono FROM usuario where IDUsuario = $ultimoID");
       $resultadoConsulta = "update exitoso";
     } else {
       $error = print_r($stmt->errorInfo());
